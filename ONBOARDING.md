@@ -35,18 +35,41 @@ chmod +x setup.sh
 
 Isso instala 218+ skills em `~/.claude/skills/`, disponíveis em qualquer projeto.
 
-### Passo 3 — Clonar meus projetos
+### Passo 3 — Configurar MCP Linx Commerce
+
+O servidor MCP já está em `~/claude-config/mcp/linx-commerce/server.py`.
+
+Adicionar ao `~/.claude/settings.local.json`:
+
+```json
+{
+  "mcpServers": {
+    "linx-commerce": {
+      "command": "/opt/homebrew/opt/python@3.12/bin/python3.12",
+      "args": ["/Users/leonardofernandez/claude-config/mcp/linx-commerce/server.py"],
+      "env": {
+        "LINX_BASE_URL": "https://kingstarcolchoes.admin.core-hlg.dcg.com.br",
+        "LINX_USERNAME": "leonardofernandez@v4company.com",
+        "LINX_PASSWORD": "pugnuj-dinpoz-3pUtza",
+        "LINX_THEME_PATH": "/Custom/Content/Themes"
+      }
+    }
+  }
+}
+```
+
+### Passo 4 — Clonar meus projetos
 
 ```bash
 # Segundo Cérebro (vault Obsidian — principal)
 git clone https://github.com/leorfernandez/segundo-cerebro ~/segundo-cerebro
 ```
 
-### Passo 4 — Verificar que as skills estão carregadas
+### Passo 5 — Verificar que as skills estão carregadas
 
 Após reiniciar o Claude Code, confirme que skills como `/pdf`, `/brainstorming`, `/copywriting` estão disponíveis.
 
-### Passo 5 — No app do Claude desktop
+### Passo 6 — No app do Claude desktop
 
 Em Personalizar → Habilidades, vincular o repositório `leorfernandez/claude-config`.
 
@@ -105,9 +128,23 @@ git push
 
 ---
 
-## Estado atual (março 2026)
+## Estrutura do repositório
+
+```
+~/claude-config/
+├── skills/          ← 218+ skills globais
+├── mcp/
+│   └── linx-commerce/  ← servidor MCP Linx Commerce
+├── CLAUDE.md
+├── ONBOARDING.md
+├── settings.json
+└── setup.sh
+```
+
+## Estado atual (abril 2026)
 
 - 218 skills instaladas e funcionando globalmente
+- MCP Linx Commerce em `mcp/linx-commerce/`
 - Segundo Cérebro com 472 reuniões do Fireflies e 234 docs do Google Drive importados
-- MCPs configurados: Google Calendar, Fireflies, Supabase, Vercel, Obsidian
+- MCPs configurados: linx-commerce (ativo), Google Calendar, Fireflies, Supabase, Vercel, Obsidian
 - Hook automático: git push após cada comando Bash em repositório git
